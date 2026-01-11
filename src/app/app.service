@@ -1,0 +1,23 @@
+[Unit]
+Description=App Python (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/app/current
+EnvironmentFile=/etc/default/app
+
+ExecStart=/opt/app/shared/venv/bin/gunicorn \
+  --workers 3 \
+  --bind 0.0.0.0:8000 \
+  --access-logfile /opt/app/logs/access.log \
+  --error-logfile /opt/app/logs/error.log \
+  app:app
+
+Restart=always
+RestartSec=3
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

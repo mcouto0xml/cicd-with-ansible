@@ -1,0 +1,68 @@
+- name: My first CD with Ansible
+  hosts: webapps
+  become: true
+
+  vars:
+    gcs_name: gs://artefact-directory
+    release_dir: "/opt/app/releases"
+    release_path: "{{ release_dir }}/{{ build_id }}"
+    shared_dir: "/opt/app/shared"
+    venv_dir: "{{ shared_dir }}/venv"
+    current_dir: "/opt/app/current"
+    env_file: "/etc/default/app"
+
+  tasks:
+    - name: Download of artifact
+      ansible.builtin.command: >
+        gsutil cp "gs://{{ gcs_name }}/releases/{{ artifact_name }}" /tmp/{{ artifact_name }}
+
+    - name: Create release directory
+      ansible.builtin.file:
+        path: "{{ release_path }}"
+        state: directory
+
+    - name: Extract tar file into release dir
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ artifact_name }}"
+        dest: "{{ release_path }}"
+        creates: "{{ release_path }}/app.py"
+        remote_src: true
+
+    - name: Install dependencies
+      ansible.builtin.shell: |
+        cd {{ release_path }}
+        {{ venv_dir }}/bin/pip install -r requirements.txt
+
+    - name: Update environment variables
+      ansible.builtin.lineinfile:
+        path: "{{ env_file }}"
+        create: true
+        line: "APP_VERSION={{ build_id }}"
+        state: present
+
+    - name: Update symlink to current release
+      ansible.builtin.file:
+        src: "{{ release_path }}"
+        dest: "{{ current_dir }}"
+        state: link
+        force: true
+
+    - name: Restart service
+      ansible.builtin.systemd:
+        name: app
+        state: restarted
+        enabled: true
+
+    - name: Health Check
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8000
+        method: GET
+        status_code: 200
+      register: api_status_response
+      retries: 10
+      delay: 2
+      until: api_status_response.status == 200
+
+    - name: Print Health Check
+      ansible.builtin.debug:
+        var: api_status_response.content
