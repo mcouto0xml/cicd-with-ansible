@@ -25,7 +25,7 @@ jobs:
         run: |
           ARTIFACT_NAME="app-${GITHUB_SHA}.tar.gz"
           cd src/app
-          tar -czf "$ARTIFACT_NAME" .
+          tar --warning=no-file-changed -czf "$ARTIFACT_NAME" .
           echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
         
       - name: Push artifact to GCS
