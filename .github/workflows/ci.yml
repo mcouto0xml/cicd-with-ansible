@@ -24,6 +24,7 @@ jobs:
       - name: Build Artifact 
         run: |
           ARTIFACT_NAME="app-${GITHUB_SHA}.tar.gz"
+          echo "teste"
           cd src/app
           tar --warning=no-file-changed -czf "$ARTIFACT_NAME" .
           echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
