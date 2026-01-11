@@ -38,7 +38,7 @@ jobs:
           pwd
           ls -la
           ls -la src/playbooks
-          sed -n '1,120p' src/playbooks/inventory.ini
+          sed -n '1,120p' src/playbooks/invetory.ini
 
 
       - name: Deploy with Ansible
@@ -48,7 +48,7 @@ jobs:
           ARTIFACT_NAME="app-${BUILD_ID}.tar.gz"
 
           ansible-playbook \
-            -i src/playbooks/inventory.ini \
+            -i src/playbooks/invetory.ini \
             src/playbooks/deploy.yaml \
             --private-key ~/.ssh/id_rsa \
             -e "build_id=${BUILD_ID} artifact_name=${ARTIFACT_NAME}"
