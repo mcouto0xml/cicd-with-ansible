@@ -1,0 +1,225 @@
+####################################
+# SISTEMA OPERACIONAL
+####################################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+
+####################################
+# EDITORES E IDEs
+####################################
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+\#*\#
+
+
+####################################
+# LOGS E TEMPORÁRIOS
+####################################
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+*.orig
+
+
+####################################
+# VARIÁVEIS DE AMBIENTE / SEGREDOS
+####################################
+.env
+.env.*
+!.env.example
+
+*.key
+*.pem
+*.crt
+secrets/
+credentials/
+
+
+####################################
+# PYTHON
+####################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+
+# Pytest / Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+####################################
+# NODE / JAVASCRIPT / TYPESCRIPT
+####################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+out/
+
+# Cache
+.cache/
+.parcel-cache/
+
+
+####################################
+# FRONTEND
+####################################
+coverage/
+.eslintcache
+
+
+####################################
+# JAVA / JVM
+####################################
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+
+####################################
+# C / C++
+####################################
+*.o
+*.out
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.dSYM/
+
+
+####################################
+# GO
+####################################
+bin/
+pkg/
+
+
+####################################
+# RUST
+####################################
+target/
+Cargo.lock
+
+
+####################################
+# DOCKER / CONTAINERS
+####################################
+*.tar
+docker-compose.override.yml
+
+
+####################################
+# TERRAFORM / INFRA
+####################################
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+crash.log
+
+
+####################################
+# KUBERNETES / HELM
+####################################
+charts/**/charts/
+charts/**/tmp/
+*.tgz
+
+
+####################################
+# ARQUIVOS DE BACKUP
+####################################
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+
+####################################
+# TESTES / RELATÓRIOS
+####################################
+reports/
+test-results/
+coverage/
+
+
+####################################
+# OUTROS
+####################################
+.cache/
+*.pid
+*.lock
