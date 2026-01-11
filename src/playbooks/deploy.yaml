@@ -3,7 +3,7 @@
   become: true
 
   vars:
-    gcs_name: gs://artefact-directory
+    gcs_name: artefact-directory
     release_dir: "/opt/app/releases"
     release_path: "{{ release_dir }}/{{ build_id }}"
     shared_dir: "/opt/app/shared"
@@ -14,7 +14,7 @@
   tasks:
     - name: Download of artifact
       ansible.builtin.command: >
-        gsutil cp "gs://{{ gcs_name }}/releases/{{ artifact_name }}" /tmp/{{ artifact_name }}
+        gsutil cp "gs://{{ gcs_name }}/{{ artifact_name }}" /tmp/{{ artifact_name }}
 
     - name: Create release directory
       ansible.builtin.file:
@@ -38,6 +38,13 @@
         path: "{{ env_file }}"
         create: true
         line: "APP_VERSION={{ build_id }}"
+        state: present
+
+    - name: Update environment variables
+      ansible.builtin.lineinfile:
+        path: "{{ env_file }}"
+        create: true
+        line: "APP_COLOR=#cc00ff"
         state: present
 
     - name: Update symlink to current release
@@ -65,4 +72,4 @@
 
     - name: Print Health Check
       ansible.builtin.debug:
-        var: api_status_response.content
+        var: api_status_response

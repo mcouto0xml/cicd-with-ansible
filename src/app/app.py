@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.get("/")
 def home():
     # Cor vinda da variável de ambiente
-    color = os.getenv("APP_COLOR", "#2c3e50")  # fallback seguro
+    color = os.getenv("APP_COLOR", "#cc00ff")  # fallback seguro
     version = os.getenv("APP_VERSION", "dev")
 
     return render_template(
