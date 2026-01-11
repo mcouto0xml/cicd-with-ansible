@@ -44,7 +44,7 @@
       ansible.builtin.lineinfile:
         path: "{{ env_file }}"
         create: true
-        line: "APP_COLOR=#cc00ff"
+        line: "APP_COLOR=#081edd"
         state: present
 
     - name: Update symlink to current release
