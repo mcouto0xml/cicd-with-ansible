@@ -3,8 +3,8 @@ name: cd-deploy
 on:
   workflow_run:
     workflows: ["ci-push-artifact"] 
-    types:
-      - completed
+    types: [completed]
+  workflow_dispatch: {}
 
 jobs:
   deploy:
