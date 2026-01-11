@@ -33,6 +33,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible
 
+      - name: Debug inventory files
+        run: |
+          pwd
+          ls -la
+          ls -la src/playbooks
+          sed -n '1,120p' src/playbooks/inventory.ini
+
+
       - name: Deploy with Ansible
         env:
           BUILD_ID: ${{ github.event.workflow_run.head_sha }}
