@@ -1,0 +1,33 @@
+name: ci-push-artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud 
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build Artifact 
+        run: |
+          ARTIFACT_NAME="app-${GITHUB_SHA}.tar.gz"
+          cd src/app
+          tar -czf "$ARTIFACT_NAME" .
+          echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
+        
+      - name: Push artifact to GCS
+        run: |
+          gsutil cp "$ARTIFACT_NAME" gs://artefact-directory
